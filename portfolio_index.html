@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Deepshikha — OIC Consultant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Deepshikha — Oracle Integration Cloud Consultant specializing in VBCS, OIC, ATP, and BI Publisher.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12182B;
+    --ink-soft:#1E2740;
+    --gold:#C99A3F;
+    --gold-deep:#9C7626;
+    --ivory:#F5F3EE;
+    --paper:#FFFFFF;
+    --line:#E4DFD3;
+    --muted:#6B6455;
+    --text:#20202A;
+    --radius:10px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{background:var(--ivory);}
+  body{
+    margin:0; color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces',serif; }
+  a{ color:inherit; }
+  img{max-width:100%;display:block;}
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  :focus-visible{ outline:2px solid var(--gold-deep); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  /* ── particle background canvas ── */
+  #bg-canvas{ position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block; }
+  #page-body{ position:relative; z-index:1; }
+
+  /* ── page-load spinner ── */
+  #page-spinner{
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:50px; height:50px; z-index:500; pointer-events:none;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  #page-spinner.done{ opacity:0; transform:translate(-50%,-50%) scale(.6); }
+  #page-spinner .ring-outer{ position:absolute; inset:0; border-radius:50%; border:2px solid rgba(201,154,63,.18); border-top-color:var(--gold-deep); animation:spinCW 1.1s linear infinite; }
+  #page-spinner .ring-mid{ position:absolute; top:8px; left:8px; right:8px; bottom:8px; border-radius:50%; border:1.5px solid rgba(201,154,63,.14); border-bottom-color:var(--gold-deep); animation:spinCCW .75s linear infinite; }
+  #page-spinner .ring-dot{ position:absolute; top:50%; left:50%; width:5px; height:5px; background:var(--gold-deep); border-radius:50%; transform:translate(-50%,-50%); animation:spinPulse 1.1s ease-in-out infinite; }
+  @keyframes spinCW{ to{ transform:rotate(360deg); } }
+  @keyframes spinCCW{ to{ transform:rotate(-360deg); } }
+  @keyframes spinPulse{ 0%,100%{ opacity:.4; transform:translate(-50%,-50%) scale(.8); } 50%{ opacity:1; transform:translate(-50%,-50%) scale(1.2); } }
+  #blur-veil{ filter:blur(6px); }
+
+  /* ── Header ── */
+  header.site{ position:sticky; top:0; z-index:40; background:var(--ink); color:#fff; }
+  .navrow{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+  .brand{ font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; letter-spacing:.2px; text-decoration:none; color:#fff; }
+  .brand span{ color:var(--gold); }
+  nav.links{ display:flex; gap:28px; align-items:center; }
+  nav.links a{ font-size:.88rem; text-decoration:none; color:rgba(255,255,255,.75); transition:color .15s; }
+  nav.links a:hover{ color:#fff; }
+  .navcta{ background:var(--gold); color:var(--ink); padding:9px 18px; border-radius:999px; font-weight:600; font-size:.84rem; text-decoration:none; border:none; cursor:pointer; }
+  .navcta:hover{ background:#dbae5a; }
+  #navToggle{ display:none; background:none; border:1px solid rgba(255,255,255,.3); color:#fff; border-radius:8px; padding:7px 10px; cursor:pointer; }
+  @media (max-width:760px){
+    nav.links{ display:none; position:absolute; top:64px; left:0; right:0; background:var(--ink); flex-direction:column; gap:0; padding:6px 0 14px; border-top:1px solid rgba(255,255,255,.08); }
+    nav.links.open{ display:flex; }
+    nav.links a{ padding:12px 28px; width:100%; }
+    #navToggle{ display:block; }
+  }
+
+  /* ── Hero ── */
+  .hero{ padding:76px 0 64px; }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .kicker{ font-size:.92rem; color:var(--gold-deep); font-weight:600; margin:0 0 14px; }
+  .hero h1{ font-size:clamp(2.1rem,4.6vw,3.35rem); line-height:1.08; font-weight:600; margin:0 0 20px; letter-spacing:-.5px; }
+  .hero p.lede{ font-size:1.06rem; color:var(--muted); max-width:56ch; margin:0 0 28px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{ display:inline-block; padding:12px 22px; border-radius:8px; text-decoration:none; font-weight:600; font-size:.92rem; cursor:pointer; border:1px solid transparent; }
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-primary:hover{ background:var(--ink-soft); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--gold-deep); color:var(--gold-deep); }
+
+  .ledger{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 8px; }
+  .ledger-title{ font-size:.72rem; color:var(--muted); letter-spacing:.3px; margin:0 0 16px; font-weight:600; }
+  .ledger-row{ display:flex; align-items:baseline; gap:8px; padding:13px 0; border-top:1px dashed var(--line); }
+  .ledger-row:first-of-type{ border-top:none; }
+  .ledger-label{ font-size:.86rem; color:var(--text); white-space:nowrap; }
+  .ledger-dots{ flex:1; border-bottom:1px dotted #C9C2B2; height:1px; margin-bottom:4px; }
+  .ledger-val{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; color:var(--gold-deep); white-space:nowrap; }
+
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .section-head{ margin-bottom:34px; max-width:64ch; }
+  .section-head .kicker{ margin-bottom:8px; }
+  .section-head h2{ font-size:clamp(1.5rem,2.6vw,2rem); font-weight:600; margin:0 0 10px; letter-spacing:-.3px; }
+  .section-head p{ color:var(--muted); margin:0; }
+
+  .about-body{ max-width:70ch; font-size:1.02rem; color:var(--text); }
+  .about-body p{ margin:0 0 16px; }
+
+  .skill-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .skill-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; }
+  .skill-card .sic{ font-size:1.3rem; margin-bottom:8px; display:block; }
+  .skill-card h3{ font-size:.96rem; margin:0 0 6px; font-weight:600; font-family:'Inter',sans-serif; }
+  .skill-card p{ margin:0; font-size:.83rem; color:var(--muted); }
+
+  .xp-item{ display:grid; grid-template-columns:200px 1fr; gap:28px; padding:26px 0; border-top:1px solid var(--line); }
+  .xp-item:first-child{ border-top:none; padding-top:0; }
+  @media (max-width:700px){ .xp-item{ grid-template-columns:1fr; gap:8px; } }
+  .xp-meta .co{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; margin:0 0 4px; }
+  .xp-meta .role{ font-size:.85rem; color:var(--gold-deep); font-weight:600; margin:0 0 4px; }
+  .xp-meta .dates{ font-size:.8rem; color:var(--muted); margin:0; }
+  .xp-body ul{ margin:0; padding-left:18px; color:var(--text); }
+  .xp-body li{ margin-bottom:8px; font-size:.94rem; }
+
+  .proj-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+  .proj-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; }
+  .proj-card h3{ font-size:1.15rem; font-weight:600; margin:0 0 8px; }
+  .proj-card p.dek{ color:var(--text); margin:0 0 14px; font-size:.95rem; }
+  .proj-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .tag{ font-size:.74rem; background:var(--ivory); border:1px solid var(--line); color:var(--muted); padding:4px 10px; border-radius:999px; }
+  .proj-card details summary{ cursor:pointer; font-size:.85rem; font-weight:600; color:var(--gold-deep); list-style:none; }
+  .proj-card details summary::-webkit-details-marker{ display:none; }
+  .proj-card details summary::after{ content:"Read the full write-up"; }
+  .proj-card details[open] summary::after{ content:"Hide write-up"; }
+  .proj-card details p{ font-size:.9rem; color:var(--muted); margin-top:12px; }
+
+  .edu-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .edu-card{ border:1px solid var(--line); border-radius:var(--radius); padding:20px; background:var(--paper); }
+  .edu-card .deg{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; margin:0 0 4px; }
+  .edu-card .note{ font-size:.83rem; color:var(--muted); margin:0; }
+
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+  @media (max-width:760px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-list{ list-style:none; padding:0; margin:0; }
+  .contact-list li{ padding:14px 0; border-top:1px dashed var(--line); font-size:.95rem; }
+  .contact-list li:first-child{ border-top:none; }
+  .contact-list .l{ color:var(--muted); font-size:.78rem; display:block; margin-bottom:3px; }
+
+  footer{ padding:30px 0; text-align:center; font-size:.8rem; color:var(--muted); border-top:1px solid var(--line); position:relative; z-index:1; }
+
+  /* ── Contact modal (Draft → Routing → Approved) ── */
+  #cm-overlay{ position:fixed; inset:0; background:rgba(18,24,43,.55); z-index:200; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(3px); }
+  #cm-overlay.open{ display:flex; }
+  #cm-modal{ background:#fff; border-radius:16px; width:100%; max-width:460px; box-shadow:0 24px 80px rgba(0,0,0,.25); overflow:hidden; animation:cmIn .22s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes cmIn{ from{ transform:translateY(20px) scale(.97); opacity:0; } to{ transform:none; opacity:1; } }
+  #cm-head{ background:var(--ink); padding:18px 22px; display:flex; align-items:center; justify-content:space-between; }
+  #cm-head h3{ color:#fff; font-size:.98rem; margin:0; font-family:'Fraunces',serif; font-weight:600; }
+  #cm-close{ background:rgba(255,255,255,.12); border:none; color:#fff; width:28px; height:28px; border-radius:50%; cursor:pointer; }
+  #cm-body{ padding:22px; }
+  .cm-stepper{ display:flex; align-items:center; margin-bottom:22px; }
+  .cm-step{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .cm-dot{ width:26px; height:26px; border-radius:50%; border:2px solid var(--line); background:var(--ivory); display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700; color:var(--muted); transition:all .35s; }
+  .cm-lbl{ font-size:.62rem; font-weight:700; color:var(--muted); letter-spacing:.3px; transition:color .35s; }
+  .cm-step.active .cm-dot{ border-color:var(--gold-deep); background:var(--gold-deep); color:#fff; }
+  .cm-step.active .cm-lbl{ color:var(--gold-deep); }
+  .cm-step.done .cm-dot{ border-color:#3E8E5A; background:#3E8E5A; color:#fff; }
+  .cm-step.done .cm-lbl{ color:#3E8E5A; }
+  .cm-conn{ flex:1; height:2px; background:var(--line); transition:background .45s; }
+  .cm-conn.done{ background:#3E8E5A; }
+  .cm-field{ margin-bottom:13px; }
+  .cm-field label{ display:block; font-size:.78rem; font-weight:600; margin-bottom:5px; }
+  .cm-field input, .cm-field textarea{ width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:.87rem; background:var(--ivory); color:var(--text); outline:none; }
+  .cm-field textarea{ min-height:84px; resize:vertical; }
+  .cm-field input:focus, .cm-field textarea:focus{ border-color:var(--gold-deep); background:#fff; }
+  .cm-submit{ background:var(--gold-deep); color:#fff; border:none; border-radius:9px; padding:11px 0; font-size:.86rem; font-weight:700; cursor:pointer; width:100%; margin-top:4px; }
+  .cm-submit:hover{ background:#7d5f1e; }
+  .cm-err{ display:none; color:#9C3B2E; font-size:.76rem; padding:8px 12px; background:#FBEDEA; border:1px solid #E9C6BE; border-radius:7px; margin-bottom:10px; }
+  .cm-spin{ width:44px; height:44px; border:3px solid #EAD9AD; border-top-color:var(--gold-deep); border-radius:50%; animation:cmSpin .8s linear infinite; margin:0 auto 14px; }
+  @keyframes cmSpin{ to{ transform:rotate(360deg); } }
+  .cm-check{ width:52px; height:52px; border-radius:50%; background:#3E8E5A; color:#fff; font-size:1.4rem; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; animation:cmPop .35s cubic-bezier(.34,1.56,.64,1) both; }
+  @keyframes cmPop{ from{ transform:scale(0); } to{ transform:scale(1); } }
+  .cm-receipt{ background:var(--ivory); border:1px solid var(--line); border-radius:9px; padding:11px 14px; margin-top:14px; font-size:.73rem; color:var(--muted); line-height:1.8; text-align:left; }
+
+  /* ── Chat widget ── */
+  #chat-bubble{ position:fixed; bottom:26px; right:26px; width:56px; height:56px; border-radius:50%; background:var(--gold); border:none; cursor:pointer; box-shadow:0 6px 20px rgba(157,118,38,.4); font-size:1.3rem; z-index:60; display:flex; align-items:center; justify-content:center; }
+  #chat-bubble:hover{ background:#dbae5a; }
+  #chat-panel{ position:fixed; bottom:94px; right:26px; width:340px; max-width:calc(100vw - 32px); height:440px; background:#fff; border-radius:14px; box-shadow:0 20px 60px rgba(18,24,43,.25); display:flex; flex-direction:column; overflow:hidden; z-index:59; transform:translateY(16px) scale(.97); opacity:0; pointer-events:none; transition:transform .2s ease, opacity .18s ease; }
+  #chat-panel.open{ transform:none; opacity:1; pointer-events:all; }
+  .chat-head{ background:var(--ink); color:#fff; padding:14px 16px; display:flex; align-items:center; gap:10px; }
+  .chat-head .av{ width:32px;height:32px;border-radius:50%;background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:1rem; }
+  .chat-head .t{ font-size:.88rem; font-weight:700; }
+  .chat-head .s{ font-size:.68rem; color:rgba(255,255,255,.6); }
+  .chat-close{ margin-left:auto; background:rgba(255,255,255,.12); border:none; color:#fff; width:26px; height:26px; border-radius:50%; cursor:pointer; }
+  .chat-msgs{ flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:9px; }
+  .cm-msg{ max-width:85%; padding:9px 12px; border-radius:11px; font-size:.82rem; line-height:1.5; }
+  .cm-msg.bot{ background:#F7F1E4; border:1px solid #EAD9AD; align-self:flex-start; border-radius:3px 11px 11px 11px; }
+  .cm-msg.user{ background:var(--ink); color:#fff; align-self:flex-end; border-radius:11px 3px 11px 11px; }
+  .typing-ind{ display:flex; gap:4px; align-items:center; padding:9px 13px; background:#F7F1E4; border:1px solid #EAD9AD; border-radius:3px 11px 11px 11px; width:fit-content; align-self:flex-start; }
+  .typing-ind span{ width:6px; height:6px; border-radius:50%; background:var(--gold-deep); animation:typeDot 1.2s ease-in-out infinite; display:inline-block; }
+  .typing-ind span:nth-child(2){ animation-delay:.2s; }
+  .typing-ind span:nth-child(3){ animation-delay:.4s; }
+  @keyframes typeDot{ 0%,80%,100%{ transform:scale(.6); opacity:.4; } 40%{ transform:scale(1); opacity:1; } }
+  .chat-chips{ padding:0 12px 8px; display:flex; flex-wrap:wrap; gap:6px; }
+  .chip{ background:var(--ivory); border:1px solid var(--line); border-radius:16px; padding:5px 10px; font-size:.72rem; cursor:pointer; }
+  .chip:hover{ border-color:var(--gold-deep); color:var(--gold-deep); }
+  .chat-input-row{ display:flex; gap:8px; padding:10px; border-top:1px solid var(--line); }
+  .chat-input-row input{ flex:1; border:1px solid var(--line); border-radius:20px; padding:8px 12px; font-size:.82rem; outline:none; }
+  .chat-input-row input:focus{ border-color:var(--gold-deep); }
+  .chat-send{ width:34px; height:34px; border-radius:50%; background:var(--ink); color:#fff; border:none; cursor:pointer; }
+  .chat-send:disabled{ opacity:.5; cursor:not-allowed; }
+</style>
+</head>
+<body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div id="page-spinner" aria-hidden="true">
+  <div class="ring-outer"></div><div class="ring-mid"></div><div class="ring-dot"></div>
+</div>
+
+<div id="page-body" class="blur-init">
+
+<header class="site">
+  <div class="wrap navrow">
+    <a href="#top" class="brand">Deepshikha <span>·</span> OIC Consultant</a>
+    <button id="navToggle" aria-label="Toggle menu">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#" class="navcta" onclick="cmOpen();return false;">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" style="border-top:none;">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Oracle Integration Cloud Consultant</p>
+        <h1>Enterprise Oracle Cloud, delivered like clockwork.</h1>
+        <p class="lede">I architect and deliver Oracle Cloud platforms that drive measurable enterprise transformation — specializing in VBCS, OIC, ATP, and BI Publisher across Finance, Procurement, and HR.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View projects</a>
+          <a href="#" class="btn btn-ghost" onclick="cmOpen();return false;">Get in touch</a>
+        </div>
+      </div>
+      <div class="ledger">
+        <p class="ledger-title">Impact, by the numbers</p>
+        <div class="ledger-row"><span class="ledger-label">Manual workload reduced</span><span class="ledger-dots"></span><span class="ledger-val">60%</span></div>
+        <div class="ledger-row"><span class="ledger-label">Business cycles accelerated</span><span class="ledger-dots"></span><span class="ledger-val">80%</span></div>
+        <div class="ledger-row"><span class="ledger-label">Client tier</span><span class="ledger-dots"></span><span class="ledger-val">Fortune 500</span></div>
+        <div class="ledger-row"><span class="ledger-label">Core stack</span><span class="ledger-dots"></span><span class="ledger-val">VBCS · OIC · ATP</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">About</p>
+        <h2>Bridging technical depth and business impact</h2>
+      </div>
+      <div class="about-body">
+        <p>At Deloitte, I lead the Reports and Extensions Track on Oracle Cloud programs for Fortune 500 clients, reducing manual workloads by 60% and accelerating business cycles by 80% through cloud-native automation and seamless ERP integration.</p>
+        <p>I bridge technical and functional teams, champion Redwood design, and mentor upcoming talent — turning complex enterprise requirements into scalable, intuitive Oracle Cloud solutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Skills</p>
+        <h2>What I build with</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="sic">⚙️</span><h3>Oracle VBCS</h3><p>End-to-end enterprise app builds — pages, fragments, action chains, data providers.</p></div>
+        <div class="skill-card"><span class="sic">🔗</span><h3>OIC Integration</h3><p>REST, SOAP, and event-driven flows connecting Fusion, PaaS apps, and external systems.</p></div>
+        <div class="skill-card"><span class="sic">🗄️</span><h3>ATP · PL/SQL</h3><p>Data modeling, bulk operations, and REST-enabled procedures on Oracle Autonomous DB.</p></div>
+        <div class="skill-card"><span class="sic">📊</span><h3>BI Publisher</h3><p>RTF/XLS templates, custom data models, burst scheduling for enterprise reporting.</p></div>
+        <div class="skill-card"><span class="sic">🏢</span><h3>Oracle Fusion ERP</h3><p>Finance, Procurement, and HR modules — functional depth behind the technical build.</p></div>
+        <div class="skill-card"><span class="sic">🤖</span><h3>AI Agents Automation</h3><p>Applying agentic automation patterns to cloud-native enterprise workflows.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Experience</p>
+        <h2>Where I've delivered</h2>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-meta">
+          <p class="co">Deloitte</p>
+          <p class="role">OIC / VBCS Consultant · Reports &amp; Extensions Track Lead</p>
+          <p class="dates">Add dates</p>
+        </div>
+        <div class="xp-body">
+          <ul>
+            <li>Lead the Reports and Extensions Track on Oracle Cloud programs for Fortune 500 clients.</li>
+            <li>Reduced manual workloads by 60% and accelerated business cycles by 80% through cloud-native automation and ERP integration.</li>
+            <li>Bridge technical and functional teams, champion Redwood design standards, and mentor incoming consultants.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-meta">
+          <p class="co">Alithya</p>
+          <p class="role">Managed Support Consultant — Integrations, Reports &amp; VBCS</p>
+          <p class="dates">Add dates</p>
+        </div>
+        <div class="xp-body">
+          <ul>
+            <li>Owned production-level managed support for OIC integrations, VBCS applications, and BI Publisher reports across enterprise clients.</li>
+            <li>Triaged and resolved live incidents, tracing recurring issues back to root cause instead of applying one-off fixes.</li>
+            <li>Maintained release and change-management discipline for production reports and extensions, keeping peak reporting cycles stable and on schedule.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Projects</p>
+        <h2>Selected work</h2>
+      </div>
+      <div class="proj-grid">
+
+        <div class="proj-card">
+          <h3>Custom Unix Wrapper for BI Publisher</h3>
+          <p class="dek">A set of reusable Unix shell scripts that trigger Oracle BI Publisher's SOAP web service programmatically — letting database jobs, OIC flows, and scheduled tasks generate formatted reports without embedding SOAP logic in every caller.</p>
+          <div class="proj-tags">
+            <span class="tag">Unix Shell</span><span class="tag">SOAP API</span><span class="tag">BI Publisher</span><span class="tag">OCI Linux</span><span class="tag">SQL*Loader</span>
+          </div>
+          <details>
+            <summary></summary>
+            <p>The wrapper accepted report path, output format, and parameters as command-line arguments, building the SOAP payload dynamically via heredoc templating. Authentication used Oracle Fusion's token-based security model, with credentials kept in encrypted files rather than hardcoded. It handled the full request lifecycle — submission, status polling, output retrieval — with retry logic for transient failures and timeout handling for long-running reports. Output could be written to the filesystem, loaded into Oracle ATP via SQL*Loader for archival, or emailed to distribution lists. Every stage was logged — timestamps, parameters, duration, response codes, output paths — for the operations monitoring tooling. Integrated as the final step of the period-close pipeline, it triggered report generation automatically once Fusion processing completed, so finance stakeholders had formatted reports within minutes of the data being ready. Report paths, parameters, and delivery targets lived in external config, so new reports could be onboarded without touching the script logic.</p>
+          </details>
+        </div>
+
+        <div class="proj-card">
+          <h3>OIC Integration Architecture</h3>
+          <p class="dek">Oracle Integration Cloud as the backbone connecting VBCS front ends, Oracle Fusion ERP, external data sources, and downstream reporting — spanning real-time, batch, and event-driven integration patterns.</p>
+          <div class="proj-tags">
+            <span class="tag">OIC</span><span class="tag">REST APIs</span><span class="tag">Oracle Fusion</span><span class="tag">ATP</span><span class="tag">XPath / JS</span>
+          </div>
+          <details>
+            <summary></summary>
+            <p>Real-time REST integrations fed VBCS apps with live Fusion data — worker records from HCM, PO status from Procurement, account data from Finance — with payloads shaped to each caller to minimize overhead. Scheduled batch flows extracted, transformed, and loaded high-volume transactional data into Oracle ATP, with failed records captured to a dedicated error table and surfaced on monitoring dashboards. Event-driven integrations subscribed to Oracle Fusion Business Events — PO approval, JE posting, HCM position change — to trigger notifications, update PaaS data stores, or kick off BI Publisher report bursts. Every integration carried structured logging with business identifiers (PO number, employee ID, JE batch reference) for end-to-end traceability, governed by a shared connection library and a documented integration inventory so new team members could onboard without relying on tribal knowledge.</p>
+          </details>
+        </div>
+
+        <div class="proj-card">
+          <h3>Enterprise BI Publisher Reporting Suite</h3>
+          <p class="dek">A reporting layer that replaced manual extracts and spreadsheet consolidations with formatted, scheduled, and on-demand Oracle Fusion reports for Finance, Procurement, and HR.</p>
+          <div class="proj-tags">
+            <span class="tag">BI Publisher</span><span class="tag">Oracle Fusion</span><span class="tag">PL/SQL</span><span class="tag">RTF Templates</span>
+          </div>
+          <details>
+            <summary></summary>
+            <p>Reports were built on Oracle's delivered data models where possible, and on custom SQL/PL-SQL data sets where standard models didn't surface the needed fields. RTF and XLS templates supported enterprise formatting — conditional formatting, grouping, multi-level summaries — output as PDF, Excel, or HTML depending on use. Coverage spanned journal entry listings, account balance summaries, and intercompany reconciliations in Finance; PO status, requisition aging, and supplier spend in Procurement; headcount and position vacancy reports in HR. Reports ran on Oracle Fusion's scheduler at daily, weekly, or period-end cadence, distributed by email or through the BI Catalog, with burst scheduling delivering personalized slices to each cost-centre owner. Templates and data models were version-controlled under a consistent naming convention, with regular query tuning and bind variables to keep high-volume reports fast.</p>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Education</p>
+        <h2>Academic background</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card"><p class="deg">MBA</p><p class="note">Add institution &amp; years</p></div>
+        <div class="edu-card"><p class="deg">BCA</p><p class="note">Add institution &amp; years</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Contact</p>
+        <h2>Let's talk</h2>
+        <p>Open to new opportunities — reach out directly or send a message.</p>
+      </div>
+      <div class="contact-grid">
+        <ul class="contact-list">
+          <li><span class="l">Phone</span>+91 XXXXXX</li>
+          <li><span class="l">Email</span>deepshikha@example.com</li>
+          <li><span class="l">LinkedIn</span>linkedin.com/in/deepshikha</li>
+        </ul>
+        <div>
+          <a href="#" class="btn btn-primary" onclick="cmOpen();return false;" style="width:100%; text-align:center;">Send a message →</a>
+          <p style="font-size:.78rem; color:var(--muted); margin-top:10px;">Opens a quick form. To wire it to real email delivery, see the README (Formspree or EmailJS, free tiers).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© <span id="yr"></span> Deepshikha. Built with plain HTML, CSS &amp; JS.</footer>
+
+</div><!-- /page-body -->
+
+<!-- ── Contact modal: Draft → Routing → Approved ── -->
+<div id="cm-overlay" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+  <div id="cm-modal">
+    <div id="cm-head">
+      <h3 id="cm-title">📬 Get in touch</h3>
+      <button id="cm-close" onclick="cmClose()" aria-label="Close">✕</button>
+    </div>
+    <div id="cm-body">
+      <div class="cm-stepper">
+        <div class="cm-step" id="cms-1"><div class="cm-dot">1</div><div class="cm-lbl">Draft</div></div>
+        <div class="cm-conn" id="cmc-12"></div>
+        <div class="cm-step" id="cms-2"><div class="cm-dot">2</div><div class="cm-lbl">Sending</div></div>
+        <div class="cm-conn" id="cmc-23"></div>
+        <div class="cm-step" id="cms-3"><div class="cm-dot">3</div><div class="cm-lbl">Sent</div></div>
+      </div>
+
+      <div id="cm-s1">
+        <div class="cm-field"><label for="cm-name">Your name</label><input class="cm-input" id="cm-name" type="text" placeholder="e.g. Priya Sharma"></div>
+        <div class="cm-field"><label for="cm-email">Email address</label><input class="cm-input" id="cm-email" type="email" placeholder="you@company.com"></div>
+        <div class="cm-field"><label for="cm-subj">Subject</label>
+          <select class="cm-input" id="cm-subj">
+            <option value="">Select a subject...</option>
+            <option>Oracle Cloud Consulting Opportunity</option>
+            <option>OIC / VBCS Architecture Discussion</option>
+            <option>Speaking / Article Collaboration</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="cm-field"><label for="cm-msg">Message</label><textarea class="cm-input" id="cm-msg" placeholder="Describe your project or question..."></textarea></div>
+        <div class="cm-err" id="cm-err"></div>
+        <button class="cm-submit" id="cm-submit-btn" onclick="cmSubmit()">Send message →</button>
+      </div>
+
+      <div id="cm-s2" style="display:none; text-align:center; padding:26px 0;">
+        <div class="cm-spin"></div>
+        <div style="font-size:.9rem; font-weight:700;" id="cm-route-msg">Preparing your message...</div>
+        <div style="font-size:.73rem; color:var(--muted); margin-top:5px;" id="cm-route-sub">Opening your email client</div>
+      </div>
+
+      <div id="cm-s3" style="display:none; text-align:center; padding:18px 0;">
+        <div class="cm-check">✓</div>
+        <div style="font-size:1rem; font-weight:800; margin-bottom:5px;">Message ready</div>
+        <div style="font-size:.81rem; color:var(--muted); line-height:1.6;">Your email client should have opened with the message pre-filled.<br>If not, email <strong style="color:var(--gold-deep);">deepshikha@example.com</strong> directly.</div>
+        <div class="cm-receipt" id="cm-receipt"></div>
+        <button class="btn btn-ghost" style="margin-top:14px;" onclick="cmReset()">Send another →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Chat widget ── -->
+<button id="chat-bubble" aria-label="Chat about Deepshikha">💬</button>
+<div id="chat-panel" role="dialog" aria-label="Chat about Deepshikha">
+  <div class="chat-head">
+    <div class="av">🤖</div>
+    <div><div class="t">Ask about Deepshikha</div><div class="s">Answers common questions</div></div>
+    <button class="chat-close" onclick="chatToggle()" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="cm-msg bot">Hi! Ask me about Deepshikha's experience, skills, or projects.</div>
+  </div>
+  <div class="chat-chips" id="chatChips">
+    <button class="chip" onclick="chatAsk('projects')">Projects</button>
+    <button class="chip" onclick="chatAsk('skills')">Skills</button>
+    <button class="chip" onclick="chatAsk('experience')">Experience</button>
+    <button class="chip" onclick="chatAsk('contact')">Contact</button>
+  </div>
+  <div class="chat-input-row">
+    <input id="chatInput" placeholder="Type a question..." onkeydown="if(event.key==='Enter')chatAsk()">
+    <button class="chat-send" id="chatSendBtn" onclick="chatAsk()" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── Page loader: min display time, then unblur ── */
+(function(){
+  var spinner = document.getElementById('page-spinner');
+  var body = document.getElementById('page-body');
+  body.style.filter = 'blur(6px)';
+  var MIN_MS = 1200, loaded = false, timerDone = false;
+  function dismiss(){
+    if(!loaded || !timerDone) return;
+    spinner.classList.add('done');
+    body.style.transition = 'filter 0.7s ease';
+    body.style.filter = 'none';
+  }
+  setTimeout(function(){ timerDone = true; dismiss(); }, MIN_MS);
+  window.addEventListener('load', function(){ loaded = true; dismiss(); });
+  setTimeout(function(){ loaded = true; dismiss(); }, 2500); /* fallback */
+})();
+
+/* ── Particle network background (gold/navy) ── */
+(function(){
+  var canvas = document.getElementById('bg-canvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var mouse = { x:-9999, y:-9999 };
+  var W, H, pts;
+  var COUNT = 80, MAX_DIST = 130;
+  var COLORS = ['#C99A3F','#C99A3F','rgba(201,154,63,0.5)','rgba(201,154,63,0.3)','rgba(18,24,43,0.35)','rgba(18,24,43,0.2)'];
+
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function make(){
+    return { x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4,
+      r:Math.random()*1.7+0.9, c:COLORS[Math.floor(Math.random()*COLORS.length)] };
+  }
+  pts = []; for(var i=0;i<COUNT;i++) pts.push(make());
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){
+      var p = pts[i];
+      var dx = p.x-mouse.x, dy = p.y-mouse.y, d = Math.sqrt(dx*dx+dy*dy);
+      if(d<100 && d>0){ var f=(100-d)/100*0.6; p.vx += dx/d*f; p.vy += dy/d*f; }
+      p.vx *= 0.98; p.vy *= 0.98;
+      var spd = Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+      if(spd>1.3){ p.vx = p.vx/spd*1.3; p.vy = p.vy/spd*1.3; }
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0){ p.x=0; p.vx=Math.abs(p.vx); } if(p.x>W){ p.x=W; p.vx=-Math.abs(p.vx); }
+      if(p.y<0){ p.y=0; p.vy=Math.abs(p.vy); } if(p.y>H){ p.y=H; p.vy=-Math.abs(p.vy); }
+    }
+    for(var i=0;i<pts.length;i++){
+      for(var j=i+1;j<pts.length;j++){
+        var a=pts[i], b=pts[j];
+        var dist = Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+        if(dist<MAX_DIST){
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle = 'rgba(201,154,63,' + ((1-dist/MAX_DIST)*0.16) + ')';
+          ctx.lineWidth = 0.8; ctx.stroke();
+        }
+      }
+    }
+    for(var i=0;i<pts.length;i++){
+      ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, pts[i].r, 0, 6.2832);
+      ctx.fillStyle = pts[i].c; ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  document.addEventListener('mousemove', function(e){ mouse.x=e.clientX; mouse.y=e.clientY; });
+  document.addEventListener('mouseleave', function(){ mouse.x=-9999; mouse.y=-9999; });
+  frame();
+})();
+
+/* mobile nav */
+document.getElementById('navToggle').addEventListener('click', function(){
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(function(a){
+  a.addEventListener('click', function(){ document.getElementById('navLinks').classList.remove('open'); });
+});
+
+/* ── Contact modal logic ── */
+function cmSetStep(n){
+  [1,2,3].forEach(function(i){
+    var el = document.getElementById('cms-'+i);
+    el.classList.remove('active','done');
+    if(i<n) el.classList.add('done'); else if(i===n) el.classList.add('active');
+  });
+  document.getElementById('cmc-12').classList.toggle('done', n>2);
+  document.getElementById('cmc-23').classList.toggle('done', n>3);
+  [1,2,3].forEach(function(i){ document.getElementById('cm-s'+i).style.display = (i===n?'':'none'); });
+}
+function cmOpen(){ cmReset(); document.getElementById('cm-overlay').classList.add('open'); }
+function cmClose(){ document.getElementById('cm-overlay').classList.remove('open'); }
+document.getElementById('cm-overlay').addEventListener('click', function(e){ if(e.target===this) cmClose(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') cmClose(); });
+
+function cmSubmit(){
+  var name = document.getElementById('cm-name').value.trim();
+  var email = document.getElementById('cm-email').value.trim();
+  var subj = document.getElementById('cm-subj').value;
+  var msg = document.getElementById('cm-msg').value.trim();
+  var err = document.getElementById('cm-err');
+  err.style.display = 'none';
+  if(!name || !email || !subj || !msg){ err.textContent='Please complete all fields.'; err.style.display='block'; return; }
+  if(!/^[^@]+@[^@]+\.[^@]+$/.test(email)){ err.textContent='Please enter a valid email address.'; err.style.display='block'; return; }
+
+  cmSetStep(2);
+  var steps = [
+    { t:400, m:'Preparing your message...', s:'Formatting for delivery' },
+    { t:1100, m:'Opening your email client...', s:'Almost there' }
+  ];
+  steps.forEach(function(x){
+    setTimeout(function(){
+      document.getElementById('cm-route-msg').textContent = x.m;
+      document.getElementById('cm-route-sub').textContent = x.s;
+    }, x.t);
+  });
+
+  var body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+  setTimeout(function(){
+    window.location.href = 'mailto:deepshikha@example.com?subject=' + encodeURIComponent(subj) + '&body=' + body;
+  }, 900);
+
+  setTimeout(function(){
+    cmSetStep(3);
+    var ts = new Date().toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' });
+    document.getElementById('cm-receipt').innerHTML =
+      '<strong>Message summary</strong><br>From: ' + name + ' &lt;' + email + '&gt;<br>Subject: ' + subj + '<br>Prepared: ' + ts;
+  }, 1900);
+}
+function cmReset(){
+  ['cm-name','cm-email','cm-msg'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('cm-subj').value='';
+  document.getElementById('cm-err').style.display='none';
+  cmSetStep(1);
+}
+
+/* ── Chat widget: rule-based KB, no external API / no keys ── */
+var KB = [
+  { k:['project','built','build','work on'], a:"Deepshikha has delivered a BI Publisher SOAP wrapper for automated reporting, a full OIC integration architecture connecting VBCS, Fusion, and ATP, and an enterprise BI Publisher reporting suite for Finance, Procurement, and HR. See the Projects section for details." },
+  { k:['skill','tech','stack','know'], a:"Core skills: Oracle VBCS, OIC integration, ATP & PL/SQL, BI Publisher, Oracle Fusion ERP, and applying AI agent automation to cloud workflows." },
+  { k:['experience','deloitte','alithya','job','role','company'], a:"Deepshikha leads the Reports & Extensions Track at Deloitte on Oracle Cloud programs for Fortune 500 clients, and previously handled production managed support for integrations, reports, and VBCS at Alithya." },
+  { k:['contact','email','phone','reach','hire'], a:"You can reach Deepshikha via the Contact section below — email, phone, or the message form." },
+  { k:['education','degree','study','mba','bca'], a:"Deepshikha holds an MBA and a BCA." },
+  { k:['impact','result','metric','number'], a:"Highlights: 60% reduction in manual workload and 80% faster business cycles delivered for Fortune 500 Oracle Cloud clients." }
+];
+var isOpen = false, busy = false;
+function chatToggle(){
+  isOpen = !isOpen;
+  document.getElementById('chat-panel').classList.toggle('open', isOpen);
+  if(isOpen) setTimeout(function(){ document.getElementById('chatInput').focus(); }, 200);
+}
+document.getElementById('chat-bubble').addEventListener('click', chatToggle);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape' && isOpen) chatToggle(); });
+
+function addMsg(text, role){
+  var box = document.getElementById('chatMsgs');
+  var div = document.createElement('div');
+  div.className = 'cm-msg ' + (role==='user' ? 'user' : 'bot');
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  var chips = document.getElementById('chatChips');
+  if(role==='user' && chips) chips.style.display = 'none';
+}
+function showTyping(){
+  var box = document.getElementById('chatMsgs');
+  var el = document.createElement('div');
+  el.className = 'typing-ind'; el.id = 'typing-ind';
+  el.innerHTML = '<span></span><span></span><span></span>';
+  box.appendChild(el); box.scrollTop = box.scrollHeight;
+}
+function hideTyping(){ var el = document.getElementById('typing-ind'); if(el) el.remove(); }
+
+function answerFor(q){
+  var lower = q.toLowerCase();
+  for(var i=0;i<KB.length;i++){
+    for(var j=0;j<KB[i].k.length;j++){
+      if(lower.indexOf(KB[i].k[j]) !== -1) return KB[i].a;
+    }
+  }
+  return "I don't have a canned answer for that yet — try the chips below, or reach out directly through the Contact section.";
+}
+function chatAsk(preset){
+  if(busy) return;
+  var input = document.getElementById('chatInput');
+  var text = preset ? ({
+    projects:'Tell me about her projects', skills:'What are her skills?',
+    experience:'Tell me about her experience', contact:'How do I contact her?'
+  })[preset] : input.value.trim();
+  if(!text) return;
+  addMsg(text, 'user');
+  if(!preset) input.value = '';
+  busy = true;
+  document.getElementById('chatSendBtn').disabled = true;
+  showTyping();
+  setTimeout(function(){
+    hideTyping();
+    addMsg(answerFor(text), 'bot');
+    busy = false;
+    document.getElementById('chatSendBtn').disabled = false;
+  }, 700);
+}
+</script>
+
+</body>
+</html>
