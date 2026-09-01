@@ -1,64 +1,47 @@
-# Deepshikha — Portfolio
+# Deepshikha — Portfolio (multi-page)
 
-A single-file, no-build portfolio site (`index.html` has everything — HTML, CSS, and JS).
-Free to host, no server needed.
+Now split into separate pages that share the same header, particle background,
+chatbot, and contact modal via `style.css` and `app.js`.
+
+## Files to upload — ALL of these, together
+
+- `index.html` (Home)
+- `about.html`
+- `experience.html`
+- `projects.html`
+- `skills.html`
+- `certifications.html`
+- `education.html`
+- `contact.html`
+- `style.css`
+- `app.js`
+
+Every page links to `style.css` and `app.js` by filename, so they all need to sit
+in the same folder (the root of your repo) — don't put them in a subfolder.
 
 ## 1. Before you publish — fill in the placeholders
 
-Open `index.html` and search for these and replace with your real details:
+Search across the `.html` files for:
 
-- `+91 XXXXXX` — phone number
-- `deepshikha@example.com` — email (appears twice: Contact list + the mailto form)
-- `linkedin.com/in/deepshikha` — your real LinkedIn URL
-- `Add dates` (x2, in the Experience section) — employment dates for Deloitte and Alithya
-- `Add institution & years` (x2, in Education) — your college/university names and years
+- `+91 XXXXXX` — phone number (in `contact.html`)
+- `deepshikha@example.com` — email (in `contact.html` and inside `app.js`'s mailto line)
+- `linkedin.com/in/deepshikha` — your real LinkedIn URL (`contact.html`)
+- `Add dates` (x2, in `experience.html`) — employment dates for Deloitte and Alithya
+- `Add institution & years` (x2, in `education.html`)
 
-## 2. Host it for free on GitHub Pages (recommended)
+## 2. Host it for free on GitHub Pages
 
-1. Create a free GitHub account at https://github.com if you don't have one.
-2. Create a new **public** repository — name it exactly `<your-github-username>.github.io`
-   (e.g. if your username is `deepshikha-dev`, name the repo `deepshikha-dev.github.io`).
-   This special name gives you a clean root URL.
-3. Upload `index.html` (and `README.md` if you like) to that repo — you can drag-and-drop
-   files directly on the GitHub website via "Add file → Upload files", no git command line needed.
-4. Commit the upload.
-5. Go to the repo's **Settings → Pages**. Under "Build and deployment", set Source to
-   **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
-6. Wait 1–2 minutes, then your site is live at:
-   `https://<your-github-username>.github.io`
-7. Share that link with recruiters — it just works, no login required to view it.
+1. Repo name must be exactly `<your-github-username>.github.io`.
+2. Upload all 10 files listed above via "Add file → Upload files" — select them
+   all at once and drag them in together, then commit.
+3. Settings → Pages → Source: "Deploy from a branch", branch `main`, folder `/ (root)`. Save.
+4. Wait 1–2 minutes, visit `https://<your-github-username>.github.io`.
 
-### If you'd rather use the command line
-```bash
-git init
-git add index.html
-git commit -m "Portfolio site"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-username>.github.io.git
-git push -u origin main
-```
-Then enable Pages in Settings as in step 5 above.
+Every nav link (Home / About / Experience / Projects / Skills / Certifications /
+Education / Contact) now loads its own page instead of scrolling — and the current
+page's link is highlighted in gold in the header.
 
-## 3. Alternative free hosts (if you don't want the github.io URL)
+## 3. Making the contact form actually send email (optional)
 
-- **Netlify** (https://netlify.com) — drag-and-drop the `index.html` file onto their dashboard,
-  get an instant `*.netlify.app` URL, can add a custom domain free.
-- **Vercel** (https://vercel.com) — similar drag-and-drop deploy, `*.vercel.app` URL.
-
-Both let you connect a GitHub repo for auto-redeploy on every push, same as GitHub Pages.
-
-## 4. Making the contact form actually send email (optional)
-
-Right now "Send message" opens the visitor's email client with your message pre-filled — this
-works with zero setup. If you'd rather receive submissions directly without the visitor needing
-an email client open:
-
-1. Sign up free at https://formspree.io and create a form — you'll get a form endpoint URL.
-2. In `index.html`, replace the `<form id="contactForm" onsubmit="return handleContactSubmit(event)">`
-   tag with `<form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">`
-   and delete the `handleContactSubmit` JS function — Formspree handles the rest.
-
-## 5. Custom domain (optional)
-
-Once live on GitHub Pages, you can point a purchased domain (e.g. `deepshikha.dev`) at it for
-free — GitHub's docs: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+Same as before — sign up free at https://formspree.io, then in `app.js` swap the
+`cmSubmit()` function's mailto logic for a `fetch()` POST to your Formspree endpoint.
