@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', function(){
   if(yr) yr.textContent = new Date().getFullYear();
 });
 
+/* ── Auto-updating years of experience (career start: 3 Oct 2022) ── */
+document.addEventListener('DOMContentLoaded', function(){
+  var el = document.getElementById('exp-years-val');
+  if(!el) return;
+  var start = new Date(2022, 9, 3); /* month is 0-indexed: 9 = October */
+  var now = new Date();
+  var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  if (now.getDate() < start.getDate()) months--;
+  var years = Math.floor(months / 12);
+  if (years < 0) years = 0;
+  el.textContent = years + '+';
+});
+
 /* ── Page loader ── */
 (function(){
   var spinner = document.getElementById('page-spinner');

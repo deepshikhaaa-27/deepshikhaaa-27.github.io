@@ -149,7 +149,12 @@ main > section:first-of-type{ border-top:none; }
 .cert-status{ flex-shrink:0; width:100px; font-size:.72rem; font-weight:700; text-align:center; padding:5px 0; border-radius:999px; }
 .cert-status.done{ background:#E7F3EA; color:#2E7D46; }
 .cert-status.progress{ background:#FBF1DD; color:var(--gold-deep); }
-.cert-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.02rem; }
+.cert-name{ font-family:'Fraunces',serif; font-weight:600; font-size:1.02rem; flex:1; }
+.cert-date{ font-size:.8rem; color:var(--muted); white-space:nowrap; }
+
+/* Projects nested under a company in the merged Experience & Projects page */
+.xp-projects{ margin-top:22px; }
+.xp-projects-label{ font-size:.72rem; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; margin:0 0 14px; }
 
 /* Learning */
 .learn-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; }

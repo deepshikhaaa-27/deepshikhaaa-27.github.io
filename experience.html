@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Experience — Deepshikha</title>
+<title>Experience & Projects — Deepshikha</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Deepshikha — Oracle Integration Cloud Consultant specializing in VBCS, OIC, ATP, and BI Publisher.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,6 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="experience.html" class="active">Experience</a>
-      <a href="projects.html">Projects</a>
       <a href="skills.html">Skills</a>
       <a href="certifications.html">Certifications</a>
       <a href="education.html">Education</a>
@@ -39,40 +38,84 @@
 
   <section class="page-hero">
     <div class="wrap">
-      <p class="kicker">Experience</p>
+      <p class="kicker">Experience &amp; Projects</p>
       <h1>Where I've delivered</h1>
-      <p>Enterprise Oracle Cloud programs, end to end.</p>
+      <p>Enterprise Oracle Cloud programs, end to end — with the project work shown under the company where it was delivered.</p>
     </div>
   </section>
+
   <section>
     <div class="wrap">
       <div class="xp-item">
         <div class="xp-meta">
-          <p class="co">Deloitte</p>
-          <p class="role">OIC / VBCS Consultant · Reports &amp; Extensions Track Lead</p>
-          <p class="dates">Add dates</p>
+          <p class="co">Alithya</p>
+          <p class="role">Managed Support Consultant — Integrations, Reports &amp; VBCS</p>
+          <p class="dates">Oct 2025 – Present</p>
         </div>
         <div class="xp-body">
           <ul>
-            <li>Lead the Reports and Extensions Track on Oracle Cloud programs for Fortune 500 clients.</li>
-            <li>Reduced manual workloads by 60% and accelerated business cycles by 80% through cloud-native automation and ERP integration.</li>
-            <li>Bridge technical and functional teams, champion Redwood design standards, and mentor incoming consultants.</li>
+            <li>Own production-level managed support for OIC integrations, VBCS applications, and BI Publisher reports across enterprise clients.</li>
+            <li>Triage and resolve live incidents, tracing recurring issues back to root cause instead of applying one-off fixes.</li>
+            <li>Maintain release and change-management discipline for production reports and extensions, keeping peak reporting cycles stable and on schedule.</li>
           </ul>
         </div>
       </div>
 
       <div class="xp-item">
         <div class="xp-meta">
-          <p class="co">Alithya</p>
-          <p class="role">Managed Support Consultant — Integrations, Reports &amp; VBCS</p>
-          <p class="dates">Add dates</p>
+          <p class="co">Deloitte</p>
+          <p class="role">OIC / VBCS Consultant · Reports &amp; Extensions Track Lead</p>
+          <p class="dates">Oct 2022 – Oct 2025</p>
         </div>
         <div class="xp-body">
           <ul>
-            <li>Owned production-level managed support for OIC integrations, VBCS applications, and BI Publisher reports across enterprise clients.</li>
-            <li>Triaged and resolved live incidents, tracing recurring issues back to root cause instead of applying one-off fixes.</li>
-            <li>Maintained release and change-management discipline for production reports and extensions, keeping peak reporting cycles stable and on schedule.</li>
+            <li>Led the Reports and Extensions Track on Oracle Cloud programs for Fortune 500 clients.</li>
+            <li>Reduced manual workloads by 60% and accelerated business cycles by 80% through cloud-native automation and ERP integration.</li>
+            <li>Bridged technical and functional teams, championed Redwood design standards, and mentored incoming consultants.</li>
           </ul>
+
+          <div class="xp-projects">
+            <p class="xp-projects-label">Selected projects delivered here</p>
+            <div class="proj-grid">
+
+              <div class="proj-card">
+                <h3>Custom Unix Wrapper for BI Publisher</h3>
+                <p class="dek">A set of reusable Unix shell scripts that trigger Oracle BI Publisher's SOAP web service programmatically — letting database jobs, OIC flows, and scheduled tasks generate formatted reports without embedding SOAP logic in every caller.</p>
+                <div class="proj-tags">
+                  <span class="tag">Unix Shell</span><span class="tag">SOAP API</span><span class="tag">BI Publisher</span><span class="tag">OCI Linux</span><span class="tag">SQL*Loader</span>
+                </div>
+                <details>
+                  <summary></summary>
+                  <p>The wrapper accepted report path, output format, and parameters as command-line arguments, building the SOAP payload dynamically via heredoc templating. Authentication used Oracle Fusion's token-based security model, with credentials kept in encrypted files rather than hardcoded. It handled the full request lifecycle — submission, status polling, output retrieval — with retry logic for transient failures and timeout handling for long-running reports. Output could be written to the filesystem, loaded into Oracle ATP via SQL*Loader for archival, or emailed to distribution lists. Every stage was logged — timestamps, parameters, duration, response codes, output paths — for the operations monitoring tooling. Integrated as the final step of the period-close pipeline, it triggered report generation automatically once Fusion processing completed, so finance stakeholders had formatted reports within minutes of the data being ready. Report paths, parameters, and delivery targets lived in external config, so new reports could be onboarded without touching the script logic.</p>
+                </details>
+              </div>
+
+              <div class="proj-card">
+                <h3>OIC Integration Architecture</h3>
+                <p class="dek">Oracle Integration Cloud as the backbone connecting VBCS front ends, Oracle Fusion ERP, external data sources, and downstream reporting — spanning real-time, batch, and event-driven integration patterns.</p>
+                <div class="proj-tags">
+                  <span class="tag">OIC</span><span class="tag">REST APIs</span><span class="tag">Oracle Fusion</span><span class="tag">ATP</span><span class="tag">XPath / JS</span>
+                </div>
+                <details>
+                  <summary></summary>
+                  <p>Real-time REST integrations fed VBCS apps with live Fusion data — worker records from HCM, PO status from Procurement, account data from Finance — with payloads shaped to each caller to minimize overhead. Scheduled batch flows extracted, transformed, and loaded high-volume transactional data into Oracle ATP, with failed records captured to a dedicated error table and surfaced on monitoring dashboards. Event-driven integrations subscribed to Oracle Fusion Business Events — PO approval, JE posting, HCM position change — to trigger notifications, update PaaS data stores, or kick off BI Publisher report bursts. Every integration carried structured logging with business identifiers (PO number, employee ID, JE batch reference) for end-to-end traceability, governed by a shared connection library and a documented integration inventory so new team members could onboard without relying on tribal knowledge.</p>
+                </details>
+              </div>
+
+              <div class="proj-card">
+                <h3>Enterprise BI Publisher Reporting Suite</h3>
+                <p class="dek">A reporting layer that replaced manual extracts and spreadsheet consolidations with formatted, scheduled, and on-demand Oracle Fusion reports for Finance, Procurement, and HR.</p>
+                <div class="proj-tags">
+                  <span class="tag">BI Publisher</span><span class="tag">Oracle Fusion</span><span class="tag">PL/SQL</span><span class="tag">RTF Templates</span>
+                </div>
+                <details>
+                  <summary></summary>
+                  <p>Reports were built on Oracle's delivered data models where possible, and on custom SQL/PL-SQL data sets where standard models didn't surface the needed fields. RTF and XLS templates supported enterprise formatting — conditional formatting, grouping, multi-level summaries — output as PDF, Excel, or HTML depending on use. Coverage spanned journal entry listings, account balance summaries, and intercompany reconciliations in Finance; PO status, requisition aging, and supplier spend in Procurement; headcount and position vacancy reports in HR. Reports ran on Oracle Fusion's scheduler at daily, weekly, or period-end cadence, distributed by email or through the BI Catalog, with burst scheduling delivering personalized slices to each cost-centre owner. Templates and data models were version-controlled under a consistent naming convention, with regular query tuning and bind variables to keep high-volume reports fast.</p>
+                </details>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
