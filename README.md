@@ -16,7 +16,6 @@ icon → commit) so the nav doesn't have a dead link.
 - `experience.html` (Experience & Work — write-ups nested under each company)
 - `skills.html` (includes an "OIC — in depth" write-up)
 - `certifications.html` (includes completion dates)
-- `education.html`
 - `contact.html`
 - `style.css`
 - `app.js`
