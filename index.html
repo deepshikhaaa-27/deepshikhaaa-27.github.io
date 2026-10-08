@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio · Oracle Integration Cloud Developer</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="load"><div class="spin"></div></div>
+<div id="app">
+<header><div class="wrap">
+  <h1 id="hName"></h1><small id="hRole"></small><br><button id="rdwOpen" onclick="$('rdw').classList.add('open')">✦ Built with Oracle Redwood design philosophy</button>
+  <nav role="tablist" id="tabs"></nav>
+</div></header>
+<main id="main"></main>
+</div>
+
+<div id="ov" role="dialog" aria-modal="true" aria-labelledby="mt"><div id="md">
+  <div class="hd"><span id="mt">Get in touch</span><button onclick="cpClose()" aria-label="Close">✕</button></div>
+  <div class="bd">
+    <div class="steps"><div class="dot act" id="d1">1</div><div class="ln" id="l1"></div><div class="dot" id="d2">2</div><div class="ln" id="l2"></div><div class="dot" id="d3">3</div></div>
+    <div id="s1">
+      <label for="cn">Your name</label><input id="cn" autocomplete="name">
+      <label for="ce">Email address</label><input id="ce" type="email" autocomplete="email">
+      <label for="cs">Subject</label><select id="cs"><option value="">Select a subject</option><option>Job opportunity</option><option>Integration architecture discussion</option><option>Collaboration</option><option>General inquiry</option></select>
+      <label for="cm">Message</label><textarea id="cm" rows="4"></textarea>
+      <div class="err" id="ce2"></div>
+      <button class="btn" style="width:100%;margin-top:14px" onclick="cpSubmit()">Send for approval</button>
+    </div>
+    <div id="s2" class="center" style="display:none"><div class="spin"></div><b id="rm">Validating request…</b></div>
+    <div id="s3" class="center" style="display:none"><div style="font-size:2rem;color:#22C55E">✓</div><b>Your email app is ready to send</b><p class="meta">If it did not open, email <span class="cfgEmail"></span> directly.</p><button class="btn ghost" onclick="cpOpen()">Send another</button></div>
+  </div>
+</div></div>
+
+<div id="rdw" class="ovl" style="position:fixed;inset:0;background:rgba(20,24,28,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:60"><div style="background:var(--card);border-radius:16px;max-width:720px;width:100%;max-height:88vh;overflow:auto">
+ <div style="background:var(--dark);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center"><div><b>Oracle Redwood Design System</b><br><small style="color:var(--red-bd)">How this portfolio follows Oracle's design philosophy</small></div><button onclick="$('rdw').classList.remove('open')" style="background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer" aria-label="Close">✕</button></div>
+ <div style="padding:22px 24px"><p style="margin-top:0">Redwood is Oracle's human-centered design system for enterprise apps. This portfolio uses its visual language to show familiarity with Oracle Cloud UI and UX.</p>
+ <div class="sec" style="margin-top:0">Principles applied</div><div class="rg"><div><b>Clarity first</b><br>Clear hierarchy: section labels, titles, short descriptions.</div><div><b>Consistent scale</b><br>Spacing, radius and type sizes follow one scale.</div><div><b>Purposeful color</b><br>Redwood red is for actions and emphasis only.</div><div><b>Human-centered</b><br>Tabs and cards keep each view short and scannable.</div></div>
+ <div class="sec">Color tokens</div><div class="sw"><span><i style="background:#C74634"></i>Redwood red #C74634</span><span><i style="background:#9B2915"></i>Red deep #9B2915</span><span><i style="background:#FFF5F3"></i>Red light #FFF5F3</span><span><i style="background:#22272B"></i>Neutral dark #22272B</span><span><i style="background:#F6F6F6"></i>Page #F6F6F6</span><span><i style="background:#737373"></i>Muted #737373</span></div></div></div></div>
+
+
+<button id="sb-b" onclick="sbT()" aria-label="Open chat assistant">🤖</button>
+<div id="sb-p" role="dialog" aria-label="Portfolio assistant"><div class="hd"><span>Portfolio Assistant</span><button onclick="sbT()" aria-label="Close chat">✕</button></div>
+ <div id="sb-m"><div class="mg b">Hi! Ask me about experience, projects, skills or availability.</div></div>
+ <div id="sb-c"></div>
+ <div id="sb-i"><input id="sb-t" placeholder="Ask about this portfolio…" aria-label="Your question"><button class="btn" onclick="sbS()">Send</button></div></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
